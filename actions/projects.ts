@@ -9,3 +9,13 @@ export async function getProjects() {
   });
   return data;
 }
+
+export async function getProject(id: string) {
+  const data = await db.query.projects.findFirst({
+    where: (p, { eq }) => eq(p.id, id),
+    with: {
+      flags: true,
+    },
+  });
+  return data;
+}

@@ -1,27 +1,38 @@
-import { getProjects } from "@/actions/projects";
+import { getProjects, getStats } from "@/actions/projects";
+import { FlagList } from "@/components/flags";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 
 export default async function Home() {
   const projects = await getProjects();
-  console.log({ projects });
+  const stats = await getStats();
   // todo: add create forms for both project and flags
-  // todo: add api route for getting projects and flags
+  // todo: style home page
+  // todo: add breadcrumbs on each page
   return (
-    <main>
-      <h1 className="text-4xl font-bold">Projects</h1>
+    <main className="text-lg">
+      <div className="flex gap-8 justify-stretch mb-8">
+        {stats.map(({ title, value }) => (
+          <Card key={title} className="flex-1">
+            <CardHeader>
+              <CardDescription>{title}</CardDescription>
+              <CardTitle>{value}</CardTitle>
+            </CardHeader>
+          </Card>
+        ))}
+      </div>
+      <h1 className="font-bold">Projects</h1>
       <div>
         {projects.map(({ id, name, flags }) => (
           <div key={id}>
             <h2>{name}</h2>
-            <div>
-              {flags.map(({ id, name, title, description, enabled }) => (
-                <div key={id}>
-                  <h3>{title}</h3>
-                  <h4>{name}</h4>
-                  <div>{enabled ? "True" : "False"}</div>
-                  <p>{description}</p>
-                </div>
-              ))}
-            </div>
+            <FlagList flags={flags} />
           </div>
         ))}
       </div>

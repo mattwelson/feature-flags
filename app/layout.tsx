@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
+import { cn } from "@/lib/utils";
+import { PageFooter, PageHeader } from "@/components/layout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -16,7 +18,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={inter.className}>{children}</body>
+      <body
+        className={cn(
+          inter.className,
+          "grid grid-rows-[auto_1fr_auto] min-h-screen"
+        )}
+      >
+        <PageHeader />
+        <div className="grid grid-cols-layout [&>*]:col-start-2">
+          {children}
+        </div>
+        <PageFooter />
+      </body>
     </html>
   );
 }

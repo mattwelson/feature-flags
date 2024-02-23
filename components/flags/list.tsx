@@ -11,6 +11,8 @@ import { Switch } from "@/components/ui/switch";
 import { FaPencilAlt, FaTrashAlt } from "react-icons/fa";
 import { Flag, Project } from "@/lib/db/schema";
 import { EditFlagSheet } from ".";
+import { DeleteFlagDialog } from "./delete-dialog";
+import { EnabledSwitch } from "./enabled-switch";
 
 // TODO: Switch to the more complex data table https://ui.shadcn.com/docs/components/data-table
 // TODO: wire up the enabled switch to up the database
@@ -36,16 +38,18 @@ export function FlagList({
       <TableBody>
         {flags.map((f) => (
           <TableRow key={f.id}>
-            <TableCell>{f.name}</TableCell>
+            <TableCell>
+              <code>{f.name}</code>
+            </TableCell>
             <TableCell className="font-bold">{f.title}</TableCell>
             <TableCell>{f.description}</TableCell>
             <TableCell>
-              <Switch checked={f.enabled} />
+              <EnabledSwitch flag={f} />
             </TableCell>
             <TableCell>
               <div className="flex gap-2 text-lg">
                 <EditFlagSheet project={project} flag={f} />
-                <FaTrashAlt />
+                <DeleteFlagDialog flag={f} />
               </div>
             </TableCell>
           </TableRow>

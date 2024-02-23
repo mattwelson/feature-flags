@@ -1,4 +1,3 @@
-import { Switch } from "@radix-ui/react-switch";
 import {
   FormControl,
   FormDescription,
@@ -11,6 +10,7 @@ import { Input } from "../ui/input";
 import { UseFormReturn } from "react-hook-form";
 import { z } from "zod";
 import { newFlagSchema } from "@/lib/db/schema";
+import { Switch } from "../ui/switch";
 
 export function FlagForm({
   form,
@@ -51,7 +51,7 @@ export function FlagForm({
         control={form.control}
         name="enabled"
         render={({ field }) => (
-          <FormItem className="flex justify-between p-2 bg-slate-100 rounded border">
+          <FormItem className="flex justify-between items-center p-2 bg-slate-100 rounded border">
             <div className="space-y-1">
               <FormLabel>
                 Enabled

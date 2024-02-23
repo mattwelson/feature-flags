@@ -6,7 +6,10 @@ import { count } from "drizzle-orm";
 export async function getProjects() {
   const data = await db.query.projects.findMany({
     with: {
-      flags: true,
+      flags: {
+        where: (flags, { not }) => not(flags.archived),
+        orderBy: (flags, { asc }) => asc(flags.name),
+      },
     },
   });
   return data;
@@ -16,7 +19,10 @@ export async function getProject(id: string) {
   const data = await db.query.projects.findFirst({
     where: (p, { eq }) => eq(p.id, id),
     with: {
-      flags: true,
+      flags: {
+        where: (flags, { not }) => not(flags.archived),
+        orderBy: (flags, { desc }) => desc(flags.name),
+      },
     },
   });
   return data;

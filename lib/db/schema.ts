@@ -11,6 +11,7 @@ export const flags = pgTable("flags", {
   projectId: uuid("project_id")
     .references(() => projects.id)
     .notNull(),
+  archived: boolean("archived").default(false).notNull(),
 });
 
 export const projects = pgTable("projects", {

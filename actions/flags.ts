@@ -20,3 +20,9 @@ export async function updateFlag(flag: NewFlag) {
 
   revalidatePath("/");
 }
+
+export async function archiveFlag(flag: NewFlag) {
+  await db.update(flags).set({ archived: true }).where(eq(flags.id, flag.id!));
+
+  revalidatePath("/");
+}

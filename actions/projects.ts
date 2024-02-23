@@ -29,7 +29,7 @@ export async function getStats() {
   const [{ value: numberOfFlags }] = await db
     .select({ value: count() })
     .from(flags);
-  console.log({ numberOfFlags });
+
   return [
     { title: "Projects", value: numberOfProjects },
     { title: "Flags", value: numberOfFlags },

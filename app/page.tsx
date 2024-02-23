@@ -1,5 +1,6 @@
 import { getProjects, getStats } from "@/actions/projects";
-import { FlagList } from "@/components/flags";
+import { CreateFlagSheet, FlagList } from "@/components/flags";
+import { Button } from "@/components/ui/button";
 import {
   Card,
   CardContent,
@@ -29,10 +30,11 @@ export default async function Home() {
       </div>
       <h1 className="font-bold">Projects</h1>
       <div>
-        {projects.map(({ id, name, flags }) => (
-          <div key={id}>
-            <h2>{name}</h2>
-            <FlagList flags={flags} />
+        {projects.map((p) => (
+          <div key={p.id}>
+            <h2>{p.name}</h2>
+            <FlagList project={p} flags={p.flags} />
+            <CreateFlagSheet project={p} />
           </div>
         ))}
       </div>

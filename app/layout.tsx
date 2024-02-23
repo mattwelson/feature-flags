@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { cn } from "@/lib/utils";
 import { PageFooter, PageHeader } from "@/components/layout";
+import { Toaster } from "sonner";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -29,6 +30,7 @@ export default function RootLayout({
           {children}
         </div>
         <PageFooter />
+        <Toaster />
       </body>
     </html>
   );
